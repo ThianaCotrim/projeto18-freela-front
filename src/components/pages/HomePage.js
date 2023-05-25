@@ -1,11 +1,14 @@
 import axios from "axios"
 import { styled } from "styled-components"
 import { useEffect, useState} from "react"
+import { useNavigate } from "react-router-dom"
 
 
 export default function HomePage(){
 
     const [cidades, setCidades] = useState([])
+
+    const navigate = useNavigate()
     
 
     useEffect(() => {
@@ -23,6 +26,11 @@ export default function HomePage(){
         console.log(err.response.data)
     })}, [])
 
+    function entrar (){
+        navigate('/Passagens')
+       
+    }
+
 
     console.log(cidades)
 
@@ -31,7 +39,7 @@ export default function HomePage(){
         <Header>
         <h1>Olá, Visitante! Pra onde quer viajar?</h1>
       </Header>
-        <ListContainer>
+        <ListContainer onClick={entrar}>
         {cidades.map((r) => (
         <CidadeContainer key={r.id}>
             <h1>{r.nomeCidade}</h1>
