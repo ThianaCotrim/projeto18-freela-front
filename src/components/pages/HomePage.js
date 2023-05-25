@@ -31,7 +31,6 @@ export default function HomePage(){
         <Header>
         <h1>Olá, Visitante! Pra onde quer viajar?</h1>
       </Header>
-
         <ListContainer>
         {cidades.map((r) => (
         <CidadeContainer key={r.id}>
