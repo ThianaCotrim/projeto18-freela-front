@@ -1,16 +1,12 @@
-import Cidades from "./components/Cidades";
-import Passoapasso from "./components/Passoapasso";
-import Titulo from "./components/Titulo";
+
+import HomePage from "./components/pages/HomePage";
 
 export default function App() {
   return (
     <div>
 
-    < Titulo />
+    < HomePage/>
 
-   <Cidades />
-      
-    <Passoapasso />
      
     </div>
   )
