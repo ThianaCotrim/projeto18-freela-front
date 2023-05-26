@@ -1,50 +1,46 @@
 import axios from "axios"
 import { styled } from "styled-components"
 import { useEffect, useState} from "react"
-import { useNavigate } from "react-router-dom"
 
-export default function Hoteis(){
+export default function HotelX(){
 
-    const [hoteis, setHoteis] = useState([])
-    const navigate = useNavigate()
+    const [hotel, setHotel] = useState([])
+
+    
 
     useEffect(() => {
 
-        const url = "http://localhost:5000/hoteis"
+        const url = "http://localhost:5000/hotelx/1"
         
     
         const promisse = axios.get(url)
     
         promisse.then((res) => {
-            setHoteis(res.data)
+            setHotel(res.data)
             console.log(res.data)
         })
         promisse.catch((err) => {
             console.log(err.response.data)
         })}, [])
 
-        function entrar(){
-            navigate('/HotelX')
-        }
 
     return (
-        <> 
-        <Header>
-        <h1>Ótimo! Já sabemos quando vocẽ vai, agora me informe onde quer ficar ?</h1>
+       <><Header>
+        <h1>Ótimo! Aqui estão mais detalhes do hotel</h1>
       </Header>
-       <ListContainer onClick={entrar}>
-       {hoteis.map((r) => (
+       <ListContainer>
+       {hotel.map((r) => (
        <HoteisContainer key={r.id}>
            <h1>{r.nomeHotel}</h1>
-           <img src={r.imagem} alt="poster"/>
+           {/* <img src={r.imagem} alt="poster"/> */}
            <ul>
-            <li>R$ {r.preco}</li>
+            <li>{r.nomeComodidade}</li>
            </ul>
            
        </HoteisContainer>
        ))}
        </ListContainer>
-       </>
+       </>  
     )
 }
 
@@ -62,21 +58,22 @@ background-color: black;
 const ListContainer = styled.div`
 background-color: black;
     
-    height: 100px;
+    
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    padding: 10px;
+   
+    flex-direction: column;
+    
 `
 
 const HoteisContainer = styled.div`
 background-color: yellow;
-    height: 300px;
+    width: 150px;
     box-shadow: 0px 2px 4px 2px #0000001A;
-    border-radius: 3px;
     display: flex;
-    align-items: center;
     flex-direction: column;
+   
+ 
+  
     margin: 10px;
     img {
         width: 300px;

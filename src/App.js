@@ -1,5 +1,6 @@
 import HomePage from "./components/pages/HomePage";
 import Hoteis from "./components/pages/Hoteis";
+import HotelX from "./components/pages/HotelX";
 import Passagens from "./components/pages/Passagens";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import styled from "styled-components"
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/passagens" element={<Passagens/>} />
         <Route path="/hoteis" element={<Hoteis/>} />
+        <Route path="/hotelx" element={<HotelX/>} />
       </Routes>
     </BrowserRouter>
   </PagesContainer>
