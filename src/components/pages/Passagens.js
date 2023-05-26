@@ -1,10 +1,15 @@
 import axios from "axios"
 import { styled } from "styled-components"
 import { useEffect, useState} from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useLocation } from 'react-router-dom';
 
 
 export default function Passagens(){
+
+    const location = useLocation();
+    const cidadeSelecionada = new URLSearchParams(location.search).get('cidade');
+  
 
     const [passagens, setPassagens] = useState([])
     const navigate = useNavigate()
@@ -31,7 +36,7 @@ export default function Passagens(){
     return (
         <>
         <Header>
-        <h1>Ótimo! Já sabemos onde você quer ir, agora me informe quando qual ir ?</h1>
+        <h1>Obaaa! Vamos para {cidadeSelecionada}. Quando vc quer ir? </h1>
       </Header>
        <ListContainer onClick={entrar}>
        {passagens.map((r) => (
@@ -39,6 +44,7 @@ export default function Passagens(){
            <h1>{r.nomeDaCompanhia}</h1>
            <img src={r.imagem} alt="poster"/>
            <ul>
+            <li>Data: {r.data}</li>
             <li>Previsão de Saída: {r.horarioSaida}</li>
             <li>Previsão de Chegada: {r.horarioChegada}</li>
             <li>R$ {r.preco}</li>
@@ -47,6 +53,7 @@ export default function Passagens(){
            
        </PassagemContainer>
        ))}
+       {/* <Link to="/" className="button">Voltar</Link> */}
        </ListContainer>
        </>
     )
@@ -75,7 +82,7 @@ background-color: black;
 
 const PassagemContainer = styled.div`
 background-color: yellow;
-    height: 300px;
+    height: 400px;
     box-shadow: 0px 2px 4px 2px #0000001A;
     border-radius: 3px;
     display: flex;

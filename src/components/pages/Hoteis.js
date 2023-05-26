@@ -1,12 +1,13 @@
 import axios from "axios"
 import { styled } from "styled-components"
 import { useEffect, useState} from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 export default function Hoteis(){
 
     const [hoteis, setHoteis] = useState([])
     const navigate = useNavigate()
+    const [hotelSelecionado, setHotelSelecionado] = useState([])
 
     useEffect(() => {
 
@@ -23,18 +24,20 @@ export default function Hoteis(){
             console.log(err.response.data)
         })}, [])
 
-        function entrar(){
-            navigate('/HotelX')
+        const entrar = (r) => {
+            setHotelSelecionado(r)
+            window.location.href = '/HotelX?cidade=' + encodeURIComponent(r);
+            // navigate('/HotelX')
         }
 
     return (
         <> 
         <Header>
-        <h1>Ótimo! Já sabemos quando vocẽ vai, agora me informe onde quer ficar ?</h1>
+        <h1>Ótimo! Já sabemos quando você vai, agora me informe onde quer ficar ?</h1>
       </Header>
-       <ListContainer onClick={entrar}>
+       <ListContainer>
        {hoteis.map((r) => (
-       <HoteisContainer key={r.id}>
+       <HoteisContainer onClick={() => entrar(r.nomeHotel)} key={r.id}>
            <h1>{r.nomeHotel}</h1>
            <img src={r.imagem} alt="poster"/>
            <ul>
@@ -43,6 +46,8 @@ export default function Hoteis(){
            
        </HoteisContainer>
        ))}
+         <Link to="/" className="button">Voltar para o início</Link>
+         <Link to="/Passagens" className="button">Voltar para página anterior</Link>
        </ListContainer>
        </>
     )
@@ -62,7 +67,7 @@ background-color: black;
 const ListContainer = styled.div`
 background-color: black;
     
-    height: 100px;
+    height: 400px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -70,10 +75,10 @@ background-color: black;
 `
 
 const HoteisContainer = styled.div`
-background-color: yellow;
-    height: 300px;
+background-color: white;
+    height: 350px;
     box-shadow: 0px 2px 4px 2px #0000001A;
-    border-radius: 3px;
+    border-radius: 60px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -81,5 +86,6 @@ background-color: yellow;
     img {
         width: 300px;
         height: 190px;
+        border-radius: 20px;
     }
 `

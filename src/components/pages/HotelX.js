@@ -1,10 +1,13 @@
 import axios from "axios"
 import { styled } from "styled-components"
 import { useEffect, useState} from "react"
+import { useLocation } from 'react-router-dom';
 
 export default function HotelX(){
 
     const [hotel, setHotel] = useState([])
+    const location = useLocation();
+    const hotelSelecionado = new URLSearchParams(location.search).get('cidade');
 
     
 
@@ -26,7 +29,7 @@ export default function HotelX(){
 
     return (
        <><Header>
-        <h1>Ótimo! Aqui estão mais detalhes do hotel</h1>
+        <h1>Ótimo! Aqui estão mais detalhes {hotelSelecionado}</h1>
       </Header>
        <ListContainer>
        {hotel.map((r) => (
