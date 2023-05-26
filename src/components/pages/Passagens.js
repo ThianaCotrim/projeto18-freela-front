@@ -25,9 +25,9 @@ export default function Passagens(){
         })}, [])
 
         function entrar (){
+
             navigate('/Hoteis')
         }
-
     return (
         <>
         <Header>
